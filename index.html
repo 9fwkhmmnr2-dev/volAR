@@ -8,8 +8,7 @@
 [data-theme=dark]{--bg:#050a14;--card:#0d1424;--text:#eef3ff;--muted:#8aa0c2;--b:#1a2a4a}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 Inter,system-ui}
 .nav{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--card) 85%, transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--b);display:flex;gap:18px;padding:12px 20px;align-items:center;flex-wrap:wrap}
-.logo{display:flex;align-items:center;gap:10px;font-weight:900}
-.badge{width:32px;height:32px;border-radius:10px;background:linear-gradient(135deg,var(--blueD),var(--blue));display:grid;place-items:center;color:white}
+.logo{display:flex;align-items:center;gap:10px;font-weight:900}.badge{width:32px;height:32px;border-radius:10px;background:linear-gradient(135deg,var(--blueD),var(--blue));display:grid;place-items:center;color:white}
 .search{flex:1;min-width:220px;max-width:520px;display:flex;align-items:center;background:var(--card);border:1px solid var(--b);border-radius:999px;padding:8px 14px}
 .search input{border:0;outline:0;background:transparent;width:100%;color:var(--text)}
 .hero{padding:56px 20px 28px;text-align:center;max-width:980px;margin:auto}
@@ -30,103 +29,107 @@
 .timeline{display:flex;gap:10px;overflow:auto;padding:10px 0}
 .phase{min-width:140px;padding:12px;border-radius:14px;border:1px solid var(--b);background:var(--card);cursor:pointer}
 .phase.active{background:var(--blue);color:white}
-audio{width:100%}
-@media(max-width:720px){.nav{padding:10px}.grid{grid-template-columns:1fr}}
+@media(max-width:720px){.grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <div class="nav">
   <div class="logo"><div class="badge">✈</div> VolAR</div>
-  <div class="search"><span>🔍</span><input id="globalSearch" placeholder="Buscá un avión, aerolínea, vuelo o aeropuerto…" oninput="doSearch(this.value)"></div>
-  <a href="#aviones" class="chip">Aviones</a><a href="#sonidos" class="chip">Sonidos</a><a href="#vuelo" class="chip">Mi vuelo</a>
+  <div class="search"><span>🔍</span><input id="globalSearch" placeholder="Buscá avión, vuelo o aeropuerto…" oninput="doSearch(this.value)"></div>
   <button class="btn" onclick="toggleTheme()">🌓</button>
 </div>
 <div class="hero">
   <h1>VolAR<br>Conocé lo que vuela sobre Argentina.</h1>
-  <p>Aviones, sonidos, rutas, tecnología y todo lo que ocurre durante un vuelo.</p>
+  <p>15 aeropuertos principales, con pasajeros y fotos.</p>
   <div class="quick">
-    <button class="chip" onclick="scrollToId('aviones')">✈️ Explorar aviones</button>
-    <button class="chip" onclick="scrollToId('sonidos')">🔊 Sonidos de aviación</button>
-    <button class="chip" onclick="scrollToId('vuelo')">🛫 Mi vuelo</button>
-    <button class="chip" onclick="scrollToId('rutas')">🗺️ Explorar rutas</button>
+    <button class="chip" onclick="scrollToId('rutas')">🗺️ Ver los 15 aeropuertos</button>
+    <button class="chip" onclick="scrollToId('aviones')">✈️ Aviones</button>
   </div>
 </div>
+
 <div class="tabs" id="filters"></div>
 <div class="section"><div id="aircraftGrid" class="grid"></div></div>
-<div class="section" id="comparador"><h2>Comparador</h2><div style="display:flex;gap:8px"><select id="c1" class="btn"></select><select id="c2" class="btn"></select><button class="btn primary" onclick="compare()">Comparar</button></div><div id="compareRes" class="grid" style="margin-top:12px"></div></div>
-<div class="section" id="sonidos"><h2>¿Qué es ese sonido?</h2><div id="soundList" class="grid"></div></div>
-<div class="section" id="sintiendo"><h2>¿Qué estoy sintiendo?</h2><div id="phaseLine" class="timeline"></div><div id="phaseDetail" class="card"></div></div>
-<div class="section" id="vuelo"><h2>🛫 Mi vuelo</h2><div class="search"><input id="flightNum" placeholder="Ej: AR1300"><button class="btn primary" onclick="findFlight()">Buscar</button></div><div id="flightRes" style="margin-top:12px"></div></div>
-<div class="section" id="rutas"><h2>🗺️ Explorar rutas — Argentina</h2><div class="card"><div id="routeMap" style="display:flex;flex-wrap:wrap;gap:8px"></div><div id="airportDetail" style="margin-top:12px"></div></div></div>
-<div class="section" id="miedo"><h2>❤️ Tengo miedo de volar — modo tranquilo</h2><div class="card"><p><b>Antes del vuelo:</b> Chequeos, APU normal.</p><p><b>Despegue:</b> Aceleración fuerte, es normal.</p><p><b>Turbulencia:</b> Como olas en el aire, el avión está preparado.</p></div></div>
+
+<div class="section" id="rutas"><h2>🗺️ Los 15 aeropuertos más transitados de Argentina</h2>
+<div class="card">
+<div id="routeMap" style="display:flex;flex-wrap:wrap;gap:8px">Cargando aeropuertos desde airports.json…</div>
+<div id="airportDetail" style="margin-top:16px"></div>
+</div></div>
+
+<div class="section" id="aviones"><h2>Aviones</h2><div id="soundList" class="grid"></div></div>
+
 <script>
-const DATA={
+let DATA={
  aircraft:[
-  {id:"a320", manufacturer:"Airbus", model:"A320", variant:"A320-200", length:37.57, wingspan:35.8, pax:186, range:6100, engines:"CFM56-5B", airlines:["AR","JA","FO"], facts:"El más usado en Argentina."},
-  {id:"a320n", manufacturer:"Airbus", model:"A320neo", variant:"A320-271N", length:37.57, wingspan:35.8, pax:186, range:6400, engines:"LEAP-1A", airlines:["AR","JA"], facts:"15% menos consumo."},
-  {id:"b738", manufacturer:"Boeing", model:"737-800", variant:"737-8AS", length:39.5, wingspan:35.8, pax:189, range:5400, engines:"CFM56-7B", airlines:["AR","FO"], facts:"Sky Interior."},
-  {id:"b38m", manufacturer:"Boeing", model:"737 MAX 8", variant:"MAX 8", length:39.47, wingspan:35.9, pax:200, range:6500, engines:"LEAP-1B", airlines:["AR"], facts:"Winglets avanzados."},
-  {id:"e190", manufacturer:"Embraer", model:"E190", variant:"E190AR", length:36.24, wingspan:28.72, pax:114, range:4500, engines:"CF34-10E", airlines:["AR"], facts:"Ideal para regionales."},
-  {id:"atr72", manufacturer:"ATR", model:"ATR 72", variant:"ATR 72-600", length:27.17, wingspan:27.05, pax:78, range:1500, engines:"PW127M", airlines:["AR"], facts:"Turbohélice eficiente."}
+  {id:"a320", manufacturer:"Airbus", model:"A320", variant:"A320-200", length:37.57, wingspan:35.8, pax:186, range:6100, engines:"CFM56-5B", facts:"El más usado en Argentina."},
+  {id:"b738", manufacturer:"Boeing", model:"737-800", variant:"737-8AS", length:39.5, wingspan:35.8, pax:189, range:5400, engines:"CFM56-7B", facts:"Sky Interior."},
+  {id:"e190", manufacturer:"Embraer", model:"E190", variant:"E190AR", length:36.24, wingspan:28.72, pax:114, range:4500, engines:"CF34-10E", facts:"Regional."}
  ],
- airlines:[
-  {id:"AR", name:"Aerolíneas Argentinas", country:"Argentina", hubs:["EZE","AEP"], fleet:["a320","a320n","b738","b38m","e190","atr72"]},
-  {id:"JA", name:"JetSMART", country:"Argentina", hubs:["AEP"], fleet:["a320","a320n"]},
-  {id:"FO", name:"Flybondi", country:"Argentina", hubs:["AEP"], fleet:["b738","a320"]}
- ],
- airports:[
-  { id:"IGR", iata:"IGR", icao:"SARI", city:"Puerto Iguazú", prov:"Misiones", airlines:["AR","JA","FO"], image:"https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Cataratas.jpg/800px-Cataratas.jpg" },
-  {id:"EZE", iata:"EZE", icao:"SAEZ", city:"Ezeiza", prov:"Buenos Aires", airlines:["AR"]},
-  {id:"AEP", iata:"AEP", icao:"SABE", city:"Buenos Aires", prov:"CABA", airlines:["AR","JA","FO"]},
-  {id:"COR", iata:"COR", icao:"SACO", city:"Córdoba", prov:"Córdoba", airlines:["AR","JA"]},
- ],
- routes:[
-  {id:"AR1300", airline:"AR", origin:"AEP", dest:"COR", aircraft:"a320", duration:"1h20"},
-  {id:"AR1736", airline:"AR", origin:"AEP", dest:"IGR", aircraft:"a320", duration:"1h55"},
-  {id:"AR1737", airline:"AR", origin:"IGR", dest:"AEP", aircraft:"a320", duration:"1h50"}
- ],
- sounds:[
-  {id:"apu", name:"APU", phase:"Antes del despegue", when:"Antes de embarque", system:"APU", what:"Pequeña turbina", isNormal:true, fact:"Se apaga al arrancar motores."},
-  {id:"flaps", name:"FLAPS", phase:"Despegue", when:"Antes de despegar", system:"Flaps", what:"Cambio de configuración", isNormal:true, fact:"Sonido hidráulico."},
-  {id:"gear", name:"LANDING GEAR", phase:"Aproximación", when:"En aproximación", system:"Tren", what:"Extensión", isNormal:true, fact:"Golpe sordo normal."}
- ],
- phases:[
-  {id:"puerta", label:"PUERTA", feel:"Vibraciones APU", hear:["apu"], doing:"Chequeos"},
-  {id:"rodaje", label:"RODAJE", feel:"Movimiento lento", hear:["flaps"], doing:"Va a pista"},
-  {id:"despegue", label:"DESPEGUE", feel:"Aceleración fuerte", hear:["flaps"], doing:"Máxima potencia"},
-  {id:"crucero", label:"CRUCERO", feel:"Estable", hear:[], doing:"Piloto automático"},
-  {id:"aterrizaje", label:"ATERRIZAJE", feel:"Descenso y reversa", hear:["gear"], doing:"Frena"}
- ]
+ airports: []
 };
+
 function toggleTheme(){const cur=document.documentElement.getAttribute('data-theme');document.documentElement.setAttribute('data-theme',cur==='dark'?'light':'dark')}
 function scrollToId(id){document.getElementById(id)?.scrollIntoView({behavior:'smooth'})}
 let activeMan='Todos';
 function renderFilters(){const mans=['Todos',...new Set(DATA.aircraft.map(a=>a.manufacturer))];document.getElementById('filters').innerHTML=mans.map(m=>`<button class="btn ${activeMan===m?'primary':''}" onclick="setMan('${m}')">${m}</button>`).join('');}
 function setMan(m){activeMan=m;renderFilters();renderAircraft()}
-function renderAircraft(list=DATA.aircraft){
+function renderAircraft(){
  const g=document.getElementById('aircraftGrid');
- const f=list.filter(a=> activeMan==='Todos' || a.manufacturer===activeMan);
- g.innerHTML=f.map(a=>`<div class="card"><div style="display:flex;justify-content:space-between"><b>${a.manufacturer} ${a.model}</b><span style="opacity:.6">${a.variant}</span></div><div class="spec"><div class="kv"><b>Longitud</b>${a.length}m</div><div class="kv"><b>Capacidad</b>${a.pax}</div><div class="kv"><b>Alcance</b>${a.range}km</div><div class="kv"><b>Motores</b>${a.engines}</div></div><div style="margin-top:8px;color:var(--muted);font-size:12px">${a.facts}</div></div>`).join('');
- document.getElementById('c1').innerHTML=DATA.aircraft.map(a=>`<option value="${a.id}">${a.model}</option>`).join('');
- document.getElementById('c2').innerHTML=DATA.aircraft.map(a=>`<option value="${a.id}">${a.model}</option>`).join('');
+ const f=DATA.aircraft.filter(a=> activeMan==='Todos' || a.manufacturer===activeMan);
+ g.innerHTML=f.map(a=>`<div class="card"><b>${a.manufacturer} ${a.model}</b><div class="spec"><div class="kv"><b>Capacidad</b>${a.pax}</div><div class="kv"><b>Alcance</b>${a.range}km</div></div><div style="margin-top:8px;color:var(--muted);font-size:12px">${a.facts}</div></div>`).join('');
 }
-function compare(){const id1=c1.value, id2=c2.value;const a1=DATA.aircraft.find(a=>a.id===id1), a2=DATA.aircraft.find(a=>a.id===id2);const rows=['length','wingspan','pax','range'];document.getElementById('compareRes').innerHTML=`<div class="card"><b>${a1.model}</b><div class="spec">${rows.map(k=>`<div class="kv"><b>${k}</b>${a1[k]||'N/D'}</div>`).join('')}</div></div><div class="card"><b>${a2.model}</b><div class="spec">${rows.map(k=>`<div class="kv"><b>${k}</b>${a2[k]||'N/D'}</div>`).join('')}</div></div>`;}
-function renderSounds(list=DATA.sounds){document.getElementById('soundList').innerHTML=list.map(s=>`<div class="card"><b>${s.name}</b> — <span style="color:var(--muted)">${s.phase}</span><div style="font-size:13px"><b>Cuándo:</b> ${s.when}<br><b>Qué pasa:</b> ${s.what}</div></div>`).join('');}
-function renderPhases(){document.getElementById('phaseLine').innerHTML=DATA.phases.map(p=>`<div class="phase" id="ph-${p.id}" onclick="showPhase('${p.id}')">${p.label}</div>`).join('');showPhase(DATA.phases[0].id);}
-function showPhase(id){document.querySelectorAll('.phase').forEach(e=>e.classList.remove('active')); document.getElementById('ph-'+id)?.classList.add('active');const p=DATA.phases.find(x=>x.id===id);document.getElementById('phaseDetail').innerHTML=`<h3>${p.label}</h3><p><b>Qué podés sentir:</b> ${p.feel}</p><p><b>Qué hace el avión:</b> ${p.doing}</p>`;}
-function findFlight(){const num=document.getElementById('flightNum').value.toUpperCase().trim();const r=DATA.routes.find(x=>x.id===num);const box=document.getElementById('flightRes');if(!r){box.innerHTML=`<div class="card">No tenemos este vuelo todavía.</div>`;return}const ac=DATA.aircraft.find(a=>a.id===r.aircraft);box.innerHTML=`<div class="card"><b>${r.id}</b> ${r.origin} → ${r.dest}<br>Aerolínea: ${r.airline}<br>Avión: ${ac.manufacturer} ${ac.model}<br>Duración: ${r.duration}</div>`;}
-function renderRoutes(){document.getElementById('routeMap').innerHTML=DATA.airports.map(ap=>`<button class="btn" onclick="showAirport('${ap.id}')">${ap.iata} — ${ap.city}</button>`).join('');}
+function renderRoutes(){
+ const map=document.getElementById('routeMap');
+ if(!DATA.airports.length){map.innerHTML='No hay aeropuertos cargados. Revisá /data/airports.json';return}
+ map.innerHTML=DATA.airports.map(ap=>`<button class="btn" onclick="showAirport('${ap.id}')">${ap.iata} — ${ap.city} <span style="opacity:.6">(${ap.pax.toLocaleString('es-AR')})</span></button>`).join('');
+ // mostrar el primero por defecto
+ showAirport(DATA.airports[0].id);
+}
 function showAirport(id){
  const ap=DATA.airports.find(a=>a.id===id);
- const dests=DATA.routes.filter(r=>r.origin===id||r.dest===id);
- document.getElementById('airportDetail').innerHTML=`<div class="card">
-   ${ap.image? `<img src="${ap.image}" style="width:100%;height:200px;object-fit:cover;border-radius:14px;margin-bottom:10px">` : ''}
-   <div style="font-size:18px"><b>${ap.city} (${ap.iata}/${ap.icao})</b></div>
-   <div style="color:var(--muted);margin-top:4px">Provincia: ${ap.prov}<br>Aerolíneas: ${ap.airlines.join(', ')}<br>Rutas: ${dests.map(d=>d.id).join(', ')||'—'}</div>
- </div>`;
+ if(!ap) return;
+ document.getElementById('airportDetail').innerHTML=`
+  <div class="card" style="max-width:600px">
+    <img src="${ap.image}" alt="${ap.name}" style="width:100%;height:220px;object-fit:cover;border-radius:14px;margin-bottom:12px" onerror="this.src='${ap.wiki_image||''}'; this.onerror=null; this.style.display=this.src?'block':'none'">
+    <div style="font-size:20px;font-weight:800">${ap.name} (${ap.iata}/${ap.icao})</div>
+    <div style="margin-top:8px;line-height:1.6">
+      <b>Ciudad:</b> ${ap.city} - ${ap.prov}<br>
+      <b>Pasajeros 2023:</b> ${ap.pax.toLocaleString('es-AR')}<br>
+      <b>Aerolíneas:</b> ${ap.airlines.join(', ')}<br>
+      <b>Imagen:</b> <code style="font-size:11px">${ap.image}</code>
+    </div>
+  </div>`;
 }
-function doSearch(q){q=q.toLowerCase(); if(!q){renderAircraft();renderSounds();return}renderAircraft(DATA.aircraft.filter(a=> (a.model+a.manufacturer).toLowerCase().includes(q)));renderSounds(DATA.sounds.filter(s=> s.name.toLowerCase().includes(q)));if(q.length>2) scrollToId('aviones');}
-renderFilters();renderAircraft();renderSounds();renderPhases();renderRoutes();
+function doSearch(q){
+ q=q.toLowerCase();
+ if(!q){renderRoutes();return}
+ const filtered=DATA.airports.filter(a=> (a.city+a.name+a.iata).toLowerCase().includes(q));
+ document.getElementById('routeMap').innerHTML=filtered.map(ap=>`<button class="btn" onclick="showAirport('${ap.id}')">${ap.iata} — ${ap.city}</button>`).join('');
+ if(q.length>2) scrollToId('rutas');
+}
+
+// Cargar airports.json desde /public/data/
+fetch('/data/airports.json')
+ .then(r=>{
+    if(!r.ok) throw new Error('no json');
+    return r.json();
+  })
+ .then(json=>{
+    DATA.airports=json;
+    renderRoutes();
+  })
+ .catch(()=>{
+    // fallback por si no encuentra el json (usa los 15 embebidos como respaldo)
+    console.log('No se pudo cargar /data/airports.json, uso fallback');
+    DATA.airports=[
+      {id:"AEP",iata:"AEP",icao:"SABE",city:"Buenos Aires",name:"Aeroparque Jorge Newbery",prov:"CABA",pax:17738000,airlines:["AR","JA","FO"],image:"/images/airports/aep.jpg"},
+      {id:"EZE",iata:"EZE",icao:"SAEZ",city:"Ezeiza",name:"Ministro Pistarini",prov:"Buenos Aires",pax:11911000,airlines:["AR"],image:"/images/airports/eze.jpg"},
+      {id:"IGR",iata:"IGR",icao:"SARI",city:"Puerto Iguazu",name:"Cataratas del Iguazu",prov:"Misiones",pax:1785000,airlines:["AR","JA","FO"],image:"/images/airports/igr.jpg"}
+    ];
+    renderRoutes();
+  });
+
+renderFilters();renderAircraft();
 </script>
 </body>
 </html>
