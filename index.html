@@ -78,7 +78,6 @@ audio{width:100%}
 <div class="section" id="miedo"><h2>❤️ Tengo miedo de volar — modo tranquilo</h2><div class="card"><p><b>Antes del vuelo:</b> El avión hace chequeos, vas a escuchar la APU (pequeña turbina). Es normal.</p><p><b>Despegue:</b> Aceleración fuerte, vibración, el morro se levanta. El ala flexiona — está diseñada para eso.</p><p><b>Turbulencia:</b> Es como olas en el aire. El avión no se va a caer. Los pilotos la anticipan y el avión está certificado para cargas mucho mayores.</p><p><b>Aterrizaje:</b> Ruido fuerte del tren, spoilers, reversa. Frenado intenso — todo previsto.</p></div></div>
 
 <script>
-// ===== DATA LAYER SEPARADA DE LA VISTA =====
 const DATA={
  aircraft:[
   {id:"a320", manufacturer:"Airbus", model:"A320", variant:"A320-200", entry:"1988", length:37.57, wingspan:35.8, height:11.76, mtow:78000, pax:186, cruise:828, ceiling:39800, range:6100, engines:"CFM56-5B", engineCount:2, airlines:["AR","JA","FO"], routes:["AEP-COR","AEP-MDZ"], facts:"El más usado en Argentina."},
@@ -94,11 +93,16 @@ const DATA={
   {id:"FO", name:"Flybondi", country:"Argentina", hubs:["AEP"], fleet:["b738","a320"]}
  ],
  airports:[
+  {id:"IGR", iata:"IGR", icao:"SARI", city:"Puerto Iguazú", prov:"Misiones", airlines:["AR","JA","FO"]},
   {id:"EZE", iata:"EZE", icao:"SAEZ", city:"Ezeiza", prov:"Buenos Aires", airlines:["AR"]},
   {id:"AEP", iata:"AEP", icao:"SABE", city:"Buenos Aires", prov:"CABA", airlines:["AR","JA","FO"]},
   {id:"COR", iata:"COR", icao:"SACO", city:"Córdoba", prov:"Córdoba", airlines:["AR","JA"]},
  ],
- routes:[{id:"AR1300", airline:"AR", origin:"AEP", dest:"COR", aircraft:"a320", duration:"1h20"}],
+ routes:[
+  {id:"AR1300", airline:"AR", origin:"AEP", dest:"COR", aircraft:"a320", duration:"1h20"},
+  {id:"AR1736", airline:"AR", origin:"AEP", dest:"IGR", aircraft:"a320", duration:"1h55"},
+  {id:"AR1737", airline:"AR", origin:"IGR", dest:"AEP", aircraft:"a320", duration:"1h50"}
+ ],
  sounds:[
   {id:"apu", name:"APU", phase:"Antes del despegue", when:"Antes de embarque", system:"Auxiliary Power Unit", what:"Pequeña turbina que da energía", isNormal:true, fact:"Se apaga al arrancar motores."},
   {id:"flaps", name:"FLAPS", phase:"Despegue", when:"Antes de despegar/aterrizar", system:"Superficies hipersustentadoras", what:"Cambio de configuración", isNormal:true, fact:"El sonido es hidráulico."},
@@ -116,14 +120,12 @@ const DATA={
 
 function toggleTheme(){const cur=document.documentElement.getAttribute('data-theme');document.documentElement.setAttribute('data-theme',cur==='dark'?'light':'dark')}
 function scrollToId(id){document.getElementById(id)?.scrollIntoView({behavior:'smooth'})}
-
 let activeMan='Todos';
 function renderFilters(){
  const mans=['Todos',...new Set(DATA.aircraft.map(a=>a.manufacturer))];
  document.getElementById('filters').innerHTML=mans.map(m=>`<button class="btn ${activeMan===m?'primary':''}" onclick="setMan('${m}')">${m}</button>`).join('');
 }
 function setMan(m){activeMan=m;renderFilters();renderAircraft()}
-
 function renderAircraft(list=DATA.aircraft){
  const g=document.getElementById('aircraftGrid');
  const f=list.filter(a=> activeMan==='Todos' || a.manufacturer===activeMan);
@@ -137,11 +139,9 @@ function renderAircraft(list=DATA.aircraft){
    <div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap">${a.airlines.map(al=>`<span class="chip" style="padding:4px 8px;font-size:11px">${al}</span>`).join('')}</div>
    <div style="margin-top:8px;color:var(--muted);font-size:12px">${a.facts}</div>
   </div>`).join('');
- // comparador selects
  document.getElementById('c1').innerHTML=DATA.aircraft.map(a=>`<option value="${a.id}">${a.model}</option>`).join('');
  document.getElementById('c2').innerHTML=DATA.aircraft.map(a=>`<option value="${a.id}">${a.model}</option>`).join('');
 }
-
 function compare(){
  const id1=c1.value, id2=c2.value;
  const a1=DATA.aircraft.find(a=>a.id===id1), a2=DATA.aircraft.find(a=>a.id===id2);
@@ -150,14 +150,12 @@ function compare(){
   <div class="card"><b>${a1.model}</b><div class="spec">${rows.map(k=>`<div class="kv"><b>${k}</b>${a1[k]||'N/D'}</div>`).join('')}</div></div>
   <div class="card"><b>${a2.model}</b><div class="spec">${rows.map(k=>`<div class="kv"><b>${k}</b>${a2[k]||'N/D'}</div>`).join('')}</div></div>`;
 }
-
 function renderSounds(list=DATA.sounds){
  document.getElementById('soundList').innerHTML=list.map(s=>`
   <div class="card"><b>${s.name}</b> — <span style="color:var(--muted)">${s.phase}</span>
   <div style="margin:8px 0"><audio controls preload="none"><source src="" type="audio/mpeg">Tu navegador no soporta audio</audio><div style="font-size:11px;color:var(--muted)">Audio demo — se carga solo al reproducir</div></div>
   <div style="font-size:13px"><b>Cuándo:</b> ${s.when}<br><b>Sistema:</b> ${s.system}<br><b>Qué pasa:</b> ${s.what}<br><b>¿Normal?</b> ${s.isNormal?'Sí, normal':'Aviso de sistema (educativo)'}<br><i>${s.fact}</i></div></div>`).join('');
 }
-
 function renderPhases(){
  document.getElementById('phaseLine').innerHTML=DATA.phases.map(p=>`<div class="phase" id="ph-${p.id}" onclick="showPhase('${p.id}')">${p.label}</div>`).join('');
  showPhase(DATA.phases[0].id);
@@ -167,7 +165,6 @@ function showPhase(id){
  const p=DATA.phases.find(x=>x.id===id);
  document.getElementById('phaseDetail').innerHTML=`<h3>${p.label}</h3><p><b>Qué podés sentir:</b> ${p.feel}</p><p><b>Qué hace el avión:</b> ${p.doing}</p><p><b>Sonidos:</b> ${p.hear.join(', ')||'—'}</p>`;
 }
-
 function findFlight(){
  const num=document.getElementById('flightNum').value.toUpperCase().trim();
  const r=DATA.routes.find(x=>x.id===num);
@@ -176,7 +173,6 @@ function findFlight(){
  const ac=DATA.aircraft.find(a=>a.id===r.aircraft);
  box.innerHTML=`<div class="card"><b>${r.id}</b> ${r.origin} → ${r.dest}<br>Aerolínea: ${r.airline}<br>Avión: ${ac.manufacturer} ${ac.model}<br>Duración: ${r.duration}</div>`;
 }
-
 function renderRoutes(){
  document.getElementById('routeMap').innerHTML=DATA.airports.map(ap=>`<button class="btn" onclick="showAirport('${ap.id}')">${ap.iata} — ${ap.city}</button>`).join('');
 }
@@ -185,14 +181,12 @@ function showAirport(id){
  const dests=DATA.routes.filter(r=>r.origin===id||r.dest===id);
  document.getElementById('airportDetail').innerHTML=`<div class="card"><b>${ap.city} (${ap.iata}/${ap.icao})</b><br>Aerolíneas: ${ap.airlines.join(', ')}<br>Rutas: ${dests.map(d=>d.id).join(', ')||'Información no disponible.'}</div>`;
 }
-
 function doSearch(q){
  q=q.toLowerCase(); if(!q){renderAircraft();renderSounds();return}
  renderAircraft(DATA.aircraft.filter(a=> (a.model+a.manufacturer).toLowerCase().includes(q)));
  renderSounds(DATA.sounds.filter(s=> s.name.toLowerCase().includes(q) || s.phase.toLowerCase().includes(q)));
  if(q.length>2) scrollToId('aviones');
 }
-
 renderFilters();renderAircraft();renderSounds();renderPhases();renderRoutes();
 </script>
 </body>
