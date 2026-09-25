@@ -1,2 +1,0 @@
-# volAR
-Guia de aeronautica
