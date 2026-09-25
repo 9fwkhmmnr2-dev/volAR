@@ -5,7 +5,7 @@
     "fabricante": "Boeing",
     "variante": "737-800",
     "familia": "B737 NG",
-    "imagen": "https://images.unsplash.com/photo-1556388158-158ea5ccacbd?auto=format&fit=crop&w=800&q=80&v=1",
+    "imagen": "/images/aircraft/b737-800.jpg",
     "operado_por": ["Aerolíneas Argentinas", "Flybondi"],
     "pax": "170-189",
     "longitud_m": 39.5,
@@ -14,9 +14,7 @@
     "alcance_km": 5665,
     "motores": "2x CFM56-7B26",
     "motores_tipo": "Turbofan",
-    "curiosidad": "Winglets clásicos inclinados. El más común en AEP.",
-    "imagen_autor": "Unsplash",
-    "imagen_licencia": "CC"
+    "curiosidad": "El más visto en AEP. Tu foto de Aerolíneas Argentinas."
   },
   {
     "id": "b737-max8",
@@ -24,7 +22,7 @@
     "fabricante": "Boeing",
     "variante": "737-8 MAX",
     "familia": "B737 MAX",
-    "imagen": "https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&w=800&q=80&v=2",
+    "imagen": "/images/aircraft/b737-max8.jpg",
     "operado_por": ["Aerolíneas Argentinas", "JetSMART"],
     "pax": "170-189",
     "longitud_m": 39.52,
@@ -33,17 +31,15 @@
     "alcance_km": 6580,
     "motores": "2x LEAP-1B",
     "motores_tipo": "Turbofan LEAP",
-    "curiosidad": "Motores gigantes con serrucho y winglets dobles. Se nota al toque.",
-    "imagen_autor": "Unsplash",
-    "imagen_licencia": "CC"
+    "curiosidad": "Se nota por winglets dobles y motores con dientes."
   },
   {
     "id": "a320-200",
     "nombre_completo": "Airbus A320-200",
     "fabricante": "Airbus",
-    "variante": "A320-200 ceo",
+    "variante": "A320-200",
     "familia": "A320ceo",
-    "imagen": "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=800&q=80&v=3",
+    "imagen": "/images/aircraft/a320-200.jpg",
     "operado_por": ["JetSMART", "LATAM"],
     "pax": "174-186",
     "longitud_m": 37.57,
@@ -52,9 +48,7 @@
     "alcance_km": 5700,
     "motores": "2x CFM56-5B",
     "motores_tipo": "Turbofan",
-    "curiosidad": "Nariz redonda Airbus, wingtip chico.",
-    "imagen_autor": "Unsplash",
-    "imagen_licencia": "CC"
+    "curiosidad": "Nariz redonda Airbus clásica."
   },
   {
     "id": "a320-neo",
@@ -62,7 +56,7 @@
     "fabricante": "Airbus",
     "variante": "A320-271N",
     "familia": "A320neo",
-    "imagen": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=800&q=80&v=4",
+    "imagen": "/images/aircraft/a320-neo.jpg",
     "operado_por": ["JetSMART Argentina"],
     "pax": "186",
     "longitud_m": 37.57,
@@ -71,9 +65,7 @@
     "alcance_km": 6400,
     "motores": "2x LEAP-1A26",
     "motores_tipo": "Turbofan neo",
-    "curiosidad": "Sharklets gigantes de 2.4m, motores enormes.",
-    "imagen_autor": "Unsplash",
-    "imagen_licencia": "CC"
+    "curiosidad": "JetSMART con yaguareté en la cola, tu foto."
   },
   {
     "id": "a321-neo",
@@ -81,7 +73,7 @@
     "fabricante": "Airbus",
     "variante": "A321-271NX",
     "familia": "A321neo",
-    "imagen": "https://images.unsplash.com/photo-1464037866556-6812c9d1c72e?auto=format&fit=crop&w=800&q=80&v=5",
+    "imagen": "/images/aircraft/a321-neo.jpg",
     "operado_por": ["JetSMART"],
     "pax": "240",
     "longitud_m": 44.51,
@@ -90,9 +82,7 @@
     "alcance_km": 7400,
     "motores": "2x LEAP-1A32",
     "motores_tipo": "Turbofan",
-    "curiosidad": "Larguísimo, 7 metros más que el A320.",
-    "imagen_autor": "Unsplash",
-    "imagen_licencia": "CC"
+    "curiosidad": "El más largo, se nota al toque vs el A320."
   },
   {
     "id": "a330-200",
@@ -100,7 +90,7 @@
     "fabricante": "Airbus",
     "variante": "A330-200",
     "familia": "A330",
-    "imagen": "https://images.unsplash.com/photo-1488085061387-422e29b40080?auto=format&fit=crop&w=800&q=80&v=6",
+    "imagen": "/images/aircraft/a330-200.jpg",
     "operado_por": ["Aerolíneas Argentinas"],
     "pax": "265",
     "longitud_m": 58.82,
@@ -109,8 +99,6 @@
     "alcance_km": 13450,
     "motores": "2x GE CF6-80E1",
     "motores_tipo": "Widebody",
-    "curiosidad": "Doble pasillo, 4 ruedas por pata, gigante.",
-    "imagen_autor": "Unsplash",
-    "imagen_licencia": "CC"
+    "curiosidad": "Doble pasillo, vuela a Madrid/Miami."
   }
 ]
