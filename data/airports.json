@@ -1,1 +1,50 @@
-[]
+[
+  {
+    "id": "eze",
+    "name": "Aeropuerto Internacional Ministro Pistarini",
+    "iata": "EZE",
+    "city": "Ezeiza, Buenos Aires",
+    "image": "public/images/airports/eze.jpg",
+    "desc": "Principal aeropuerto internacional de Argentina."
+  },
+  {
+    "id": "aep",
+    "name": "Aeroparque Jorge Newbery",
+    "iata": "AEP",
+    "city": "CABA",
+    "image": "public/images/airports/aep.jpg",
+    "desc": "Aeropuerto doméstico y regional."
+  },
+  {
+    "id": "cor",
+    "name": "Aeropuerto Ing. Ambrosio Taravella",
+    "iata": "COR",
+    "city": "Córdoba",
+    "image": "public/images/airports/cor.jpg",
+    "desc": "Principal aeropuerto del centro del país."
+  },
+  {
+    "id": "mdz",
+    "name": "Aeropuerto El Plumerillo",
+    "iata": "MDZ",
+    "city": "Mendoza",
+    "image": "public/images/airports/mdz.jpg",
+    "desc": "Puerta de entrada a la región de Cuyo."
+  },
+  {
+    "id": "bRC",
+    "name": "Aeropuerto de Bariloche",
+    "iata": "BRC",
+    "city": "San Carlos de Bariloche",
+    "image": "public/images/airports/brc.jpg",
+    "desc": "Aeropuerto turístico de la Patagonia."
+  },
+  {
+    "id": "igr",
+    "name": "Aeropuerto de Puerto Iguazú",
+    "iata": "IGR",
+    "city": "Puerto Iguazú",
+    "image": "public/images/airports/igr.jpg",
+    "desc": "Cercano a las Cataratas del Iguazú."
+  }
+]
