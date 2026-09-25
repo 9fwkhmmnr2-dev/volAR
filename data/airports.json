@@ -19,5 +19,12 @@
     "name": "Jorge Newbery",
     "city": "CABA",
     "image": "/public/images/airports/aep.jpg"
+  },
+  {
+    "id": "cor",
+    "iata": "COR",
+    "name": "Ing. Ambrosio Taravella",
+    "city": "Córdoba",
+    "image": "/public/images/airports/cor.jpg"
   }
 ]
