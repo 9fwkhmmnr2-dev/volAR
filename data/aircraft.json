@@ -5,7 +5,7 @@
     "fabricante": "Boeing",
     "variante": "737-800",
     "familia": "B737 NG",
-    "imagen": "/images/aircraft/b737-800.jpg",
+    "imagen": "/images/aircraft/b737-800.jpg?v=999",
     "operado_por": ["Aerolíneas Argentinas", "Flybondi"],
     "pax": "170-189",
     "longitud_m": 39.5,
@@ -14,7 +14,7 @@
     "alcance_km": 5665,
     "motores": "2x CFM56-7B26",
     "motores_tipo": "Turbofan",
-    "curiosidad": "El más visto en AEP. Tu foto de Aerolíneas Argentinas."
+    "curiosidad": "El celeste de Aerolíneas que mandaste vos."
   },
   {
     "id": "b737-max8",
@@ -22,7 +22,7 @@
     "fabricante": "Boeing",
     "variante": "737-8 MAX",
     "familia": "B737 MAX",
-    "imagen": "/images/aircraft/b737-max8.jpg",
+    "imagen": "/images/aircraft/b737-max8.jpg?v=999",
     "operado_por": ["Aerolíneas Argentinas", "JetSMART"],
     "pax": "170-189",
     "longitud_m": 39.52,
@@ -31,7 +31,7 @@
     "alcance_km": 6580,
     "motores": "2x LEAP-1B",
     "motores_tipo": "Turbofan LEAP",
-    "curiosidad": "Se nota por winglets dobles y motores con dientes."
+    "curiosidad": "Winglets dobles, motores con serrucho."
   },
   {
     "id": "a320-200",
@@ -39,7 +39,7 @@
     "fabricante": "Airbus",
     "variante": "A320-200",
     "familia": "A320ceo",
-    "imagen": "/images/aircraft/a320-200.jpg",
+    "imagen": "/images/aircraft/a320-200.jpg?v=999",
     "operado_por": ["JetSMART", "LATAM"],
     "pax": "174-186",
     "longitud_m": 37.57,
@@ -48,7 +48,7 @@
     "alcance_km": 5700,
     "motores": "2x CFM56-5B",
     "motores_tipo": "Turbofan",
-    "curiosidad": "Nariz redonda Airbus clásica."
+    "curiosidad": "El Airbus con cartel A320 en el fuselaje."
   },
   {
     "id": "a320-neo",
@@ -56,7 +56,7 @@
     "fabricante": "Airbus",
     "variante": "A320-271N",
     "familia": "A320neo",
-    "imagen": "/images/aircraft/a320-neo.jpg",
+    "imagen": "/images/aircraft/a320-neo.jpg?v=999",
     "operado_por": ["JetSMART Argentina"],
     "pax": "186",
     "longitud_m": 37.57,
@@ -65,7 +65,7 @@
     "alcance_km": 6400,
     "motores": "2x LEAP-1A26",
     "motores_tipo": "Turbofan neo",
-    "curiosidad": "JetSMART con yaguareté en la cola, tu foto."
+    "curiosidad": "El del yaguareté de JetSMART que mandaste."
   },
   {
     "id": "a321-neo",
@@ -73,7 +73,7 @@
     "fabricante": "Airbus",
     "variante": "A321-271NX",
     "familia": "A321neo",
-    "imagen": "/images/aircraft/a321-neo.jpg",
+    "imagen": "/images/aircraft/a321-neo.jpg?v=999",
     "operado_por": ["JetSMART"],
     "pax": "240",
     "longitud_m": 44.51,
@@ -82,7 +82,7 @@
     "alcance_km": 7400,
     "motores": "2x LEAP-1A32",
     "motores_tipo": "Turbofan",
-    "curiosidad": "El más largo, se nota al toque vs el A320."
+    "curiosidad": "El larguísimo del hangar."
   },
   {
     "id": "a330-200",
@@ -90,7 +90,7 @@
     "fabricante": "Airbus",
     "variante": "A330-200",
     "familia": "A330",
-    "imagen": "/images/aircraft/a330-200.jpg",
+    "imagen": "/images/aircraft/a330-200.jpg?v=999",
     "operado_por": ["Aerolíneas Argentinas"],
     "pax": "265",
     "longitud_m": 58.82,
@@ -99,6 +99,6 @@
     "alcance_km": 13450,
     "motores": "2x GE CF6-80E1",
     "motores_tipo": "Widebody",
-    "curiosidad": "Doble pasillo, vuela a Madrid/Miami."
+    "curiosidad": "El grande arriba de las nubes."
   }
 ]
