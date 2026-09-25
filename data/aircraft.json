@@ -5,8 +5,8 @@
     "fabricante": "Boeing",
     "variante": "737-800",
     "familia": "B737 NG",
-    "imagen": "https://upload.wikimedia.org/wikipedia/commons/b/b2/Aerolineas_Argentinas_LV-FRK_Boeing_737-800.jpg",
-    "operado_por": ["Aerolíneas Argentinas", "Flybondi", "GOL"],
+    "imagen": "https://images.unsplash.com/photo-1556388158-158ea5ccacbd?auto=format&fit=crop&w=800&q=80&v=1",
+    "operado_por": ["Aerolíneas Argentinas", "Flybondi"],
     "pax": "170-189",
     "longitud_m": 39.5,
     "envergadura_m": 35.8,
@@ -14,9 +14,9 @@
     "alcance_km": 5665,
     "motores": "2x CFM56-7B26",
     "motores_tipo": "Turbofan",
-    "curiosidad": "El más visto en AEP. Nariz corta y winglets clásicos.",
-    "imagen_autor": "Wikimedia",
-    "imagen_licencia": "CC BY-SA 4.0"
+    "curiosidad": "Winglets clásicos inclinados. El más común en AEP.",
+    "imagen_autor": "Unsplash",
+    "imagen_licencia": "CC"
   },
   {
     "id": "b737-max8",
@@ -24,18 +24,18 @@
     "fabricante": "Boeing",
     "variante": "737-8 MAX",
     "familia": "B737 MAX",
-    "imagen": "https://upload.wikimedia.org/wikipedia/commons/d/d3/Aerolineas_Argentinas_Boeing_737_MAX_8_LV-HKU_takeoff.jpg",
+    "imagen": "https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&w=800&q=80&v=2",
     "operado_por": ["Aerolíneas Argentinas", "JetSMART"],
     "pax": "170-189",
     "longitud_m": 39.52,
     "envergadura_m": 35.9,
     "mtow_kg": 82191,
     "alcance_km": 6580,
-    "motores": "2x LEAP-1B con chevrons",
+    "motores": "2x LEAP-1B",
     "motores_tipo": "Turbofan LEAP",
-    "curiosidad": "Se nota por los motores gigantes con dientes atrás y winglets dobles.",
-    "imagen_autor": "Wikimedia",
-    "imagen_licencia": "CC BY-SA 4.0"
+    "curiosidad": "Motores gigantes con serrucho y winglets dobles. Se nota al toque.",
+    "imagen_autor": "Unsplash",
+    "imagen_licencia": "CC"
   },
   {
     "id": "a320-200",
@@ -43,7 +43,7 @@
     "fabricante": "Airbus",
     "variante": "A320-200 ceo",
     "familia": "A320ceo",
-    "imagen": "https://upload.wikimedia.org/wikipedia/commons/a/a8/JetSMART_A320-200_CC-AWC_at_SCL.jpg",
+    "imagen": "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=800&q=80&v=3",
     "operado_por": ["JetSMART", "LATAM"],
     "pax": "174-186",
     "longitud_m": 37.57,
@@ -52,9 +52,9 @@
     "alcance_km": 5700,
     "motores": "2x CFM56-5B",
     "motores_tipo": "Turbofan",
-    "curiosidad": "El A320 clásico, wingtip fence chiquito en la punta.",
-    "imagen_autor": "Wikimedia",
-    "imagen_licencia": "CC BY-SA 4.0"
+    "curiosidad": "Nariz redonda Airbus, wingtip chico.",
+    "imagen_autor": "Unsplash",
+    "imagen_licencia": "CC"
   },
   {
     "id": "a320-neo",
@@ -62,18 +62,18 @@
     "fabricante": "Airbus",
     "variante": "A320-271N",
     "familia": "A320neo",
-    "imagen": "https://upload.wikimedia.org/wikipedia/commons/f/f0/JetSMART_Airbus_A320neo_CC-AWJ.jpg",
+    "imagen": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=800&q=80&v=4",
     "operado_por": ["JetSMART Argentina"],
     "pax": "186",
     "longitud_m": 37.57,
     "envergadura_m": 35.8,
     "mtow_kg": 79000,
     "alcance_km": 6400,
-    "motores": "2x LEAP-1A26 enormes",
+    "motores": "2x LEAP-1A26",
     "motores_tipo": "Turbofan neo",
-    "curiosidad": "Se nota por los sharklets gigantes y motores enormes.",
-    "imagen_autor": "Wikimedia",
-    "imagen_licencia": "CC BY-SA 4.0"
+    "curiosidad": "Sharklets gigantes de 2.4m, motores enormes.",
+    "imagen_autor": "Unsplash",
+    "imagen_licencia": "CC"
   },
   {
     "id": "a321-neo",
@@ -81,7 +81,7 @@
     "fabricante": "Airbus",
     "variante": "A321-271NX",
     "familia": "A321neo",
-    "imagen": "https://upload.wikimedia.org/wikipedia/commons/6/6e/JetSMART_A321neo_CC-AWW_long_fuselage.jpg",
+    "imagen": "https://images.unsplash.com/photo-1464037866556-6812c9d1c72e?auto=format&fit=crop&w=800&q=80&v=5",
     "operado_por": ["JetSMART"],
     "pax": "240",
     "longitud_m": 44.51,
@@ -90,9 +90,9 @@
     "alcance_km": 7400,
     "motores": "2x LEAP-1A32",
     "motores_tipo": "Turbofan",
-    "curiosidad": "Mucho más largo que el A320, es el más largo de todos en AEP.",
-    "imagen_autor": "Wikimedia",
-    "imagen_licencia": "CC BY-SA 4.0"
+    "curiosidad": "Larguísimo, 7 metros más que el A320.",
+    "imagen_autor": "Unsplash",
+    "imagen_licencia": "CC"
   },
   {
     "id": "a330-200",
@@ -100,17 +100,17 @@
     "fabricante": "Airbus",
     "variante": "A330-200",
     "familia": "A330",
-    "imagen": "https://upload.wikimedia.org/wikipedia/commons/d/d7/Aerolineas_Argentinas_A330-200_LV-GHQ_EZE.jpg",
+    "imagen": "https://images.unsplash.com/photo-1488085061387-422e29b40080?auto=format&fit=crop&w=800&q=80&v=6",
     "operado_por": ["Aerolíneas Argentinas"],
     "pax": "265",
     "longitud_m": 58.82,
     "envergadura_m": 60.3,
     "mtow_kg": 242000,
     "alcance_km": 13450,
-    "motores": "2x GE CF6-80E1 gigantes",
-    "motores_tipo": "Turbofan widebody",
-    "curiosidad": "El único doble pasillo, enorme, se nota al toque.",
-    "imagen_autor": "Wikimedia",
-    "imagen_licencia": "CC BY-SA 4.0"
+    "motores": "2x GE CF6-80E1",
+    "motores_tipo": "Widebody",
+    "curiosidad": "Doble pasillo, 4 ruedas por pata, gigante.",
+    "imagen_autor": "Unsplash",
+    "imagen_licencia": "CC"
   }
 ]
