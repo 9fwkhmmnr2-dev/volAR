@@ -5,7 +5,7 @@
     "fabricante": "Boeing",
     "variante": "737-800",
     "familia": "B737 NG",
-    "imagen": "https://images.unsplash.com/photo-1556388158-158ea5ccacbd?q=80&w=800",
+    "imagen": "https://upload.wikimedia.org/wikipedia/commons/c/c7/Aerol%C3%ADneas_Argentinas_Boeing_737-800_LV-FRK.jpg",
     "operado_por": ["Aerolíneas Argentinas", "Flybondi", "GOL"],
     "pax": "170-189",
     "longitud_m": 39.5,
@@ -15,8 +15,8 @@
     "motores": "2x CFM56-7B26",
     "motores_tipo": "Turbofan",
     "curiosidad": "El más visto en AEP. 189 asientos en Flybondi, 170 en AR.",
-    "imagen_autor": "Unsplash",
-    "imagen_licencia": "CC"
+    "imagen_autor": "Wikimedia",
+    "imagen_licencia": "CC BY-SA 4.0"
   },
   {
     "id": "b737-max8",
@@ -24,7 +24,7 @@
     "fabricante": "Boeing",
     "variante": "737-8 MAX",
     "familia": "B737 MAX",
-    "imagen": "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=800",
+    "imagen": "https://upload.wikimedia.org/wikipedia/commons/9/97/Aerolineas_Argentinas_Boeing_737_MAX_8_LV-HKU.jpg",
     "operado_por": ["Aerolíneas Argentinas", "JetSMART"],
     "pax": "170-189",
     "longitud_m": 39.52,
@@ -33,17 +33,17 @@
     "alcance_km": 6580,
     "motores": "2x LEAP-1B",
     "motores_tipo": "Turbofan",
-    "curiosidad": "Más nuevo, 14% menos consumo.",
-    "imagen_autor": "Unsplash",
-    "imagen_licencia": "CC"
+    "curiosidad": "Más nuevo, 14% menos consumo y más silencioso.",
+    "imagen_autor": "Wikimedia",
+    "imagen_licencia": "CC BY-SA 4.0"
   },
   {
     "id": "a320-200",
     "nombre_completo": "Airbus A320-200",
     "fabricante": "Airbus",
     "variante": "A320-200",
-    "familia": "A320",
-    "imagen": "https://images.unsplash.com/photo-1464037866556-6812c9d1c72e?q=80&w=800",
+    "familia": "A320ceo",
+    "imagen": "https://upload.wikimedia.org/wikipedia/commons/5/5a/JetSmart_Airbus_A320-200_CC-AWC.jpg",
     "operado_por": ["JetSMART", "LATAM"],
     "pax": "174-186",
     "longitud_m": 37.57,
@@ -52,9 +52,9 @@
     "alcance_km": 5700,
     "motores": "2x CFM56-5B",
     "motores_tipo": "Turbofan",
-    "curiosidad": "Base de JetSMART y LATAM Argentina.",
-    "imagen_autor": "Unsplash",
-    "imagen_licencia": "CC"
+    "curiosidad": "Base de JetSMART y LATAM Argentina. Muy común en AEP-SCL.",
+    "imagen_autor": "Wikimedia",
+    "imagen_licencia": "CC BY-SA 4.0"
   },
   {
     "id": "a330-200",
@@ -62,7 +62,7 @@
     "fabricante": "Airbus",
     "variante": "A330-200",
     "familia": "A330",
-    "imagen": "https://images.unsplash.com/photo-1488085061387-422e29b40080?q=80&w=800",
+    "imagen": "https://upload.wikimedia.org/wikipedia/commons/7/7e/Aerol%C3%ADneas_Argentinas_Airbus_A330-200_LV-GHQ.jpg",
     "operado_por": ["Aerolíneas Argentinas"],
     "pax": "265",
     "longitud_m": 58.82,
@@ -71,9 +71,9 @@
     "alcance_km": 13450,
     "motores": "2x GE CF6-80E1",
     "motores_tipo": "Turbofan",
-    "curiosidad": "Largo alcance, vuela a Madrid y Miami.",
-    "imagen_autor": "Unsplash",
-    "imagen_licencia": "CC"
+    "curiosidad": "Largo alcance, vuela a Madrid, Miami y Nueva York.",
+    "imagen_autor": "Wikimedia",
+    "imagen_licencia": "CC BY-SA 4.0"
   },
   {
     "id": "e190-ar",
@@ -81,7 +81,7 @@
     "fabricante": "Embraer",
     "variante": "E190AR",
     "familia": "E-Jet",
-    "imagen": "https://images.unsplash.com/photo-1540339832862-474599807836?q=80&w=800",
+    "imagen": "https://upload.wikimedia.org/wikipedia/commons/8/8a/Aerolineas_Argentinas_Embraer_190_LV-CMA.jpg",
     "operado_por": ["Aerolíneas Argentinas"],
     "pax": "96",
     "longitud_m": 36.24,
@@ -90,9 +90,9 @@
     "alcance_km": 4260,
     "motores": "2x GE CF34-10E",
     "motores_tipo": "Turbofan",
-    "curiosidad": "Regional 2+2, ideal para rutas cortas.",
-    "imagen_autor": "Unsplash",
-    "imagen_licencia": "CC"
+    "curiosidad": "Ex Austral, 8 en business + 88 economy, asientos 2+2.",
+    "imagen_autor": "Wikimedia",
+    "imagen_licencia": "CC BY-SA 2.0"
   },
   {
     "id": "e195-e2",
@@ -100,7 +100,7 @@
     "fabricante": "Embraer",
     "variante": "E195-E2",
     "familia": "E-Jet E2",
-    "imagen": "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?q=80&w=800",
+    "imagen": "https://upload.wikimedia.org/wikipedia/commons/7/7a/Embraer_E195-E2_STS.jpg",
     "operado_por": ["Aerolíneas Argentinas"],
     "pax": "136",
     "longitud_m": 41.5,
@@ -108,9 +108,9 @@
     "mtow_kg": 61500,
     "alcance_km": 4815,
     "motores": "2x PW1900G",
-    "motores_tipo": "Turbofan",
-    "curiosidad": "Nuevo desde 2025 en AR.",
-    "imagen_autor": "Unsplash",
-    "imagen_licencia": "CC"
+    "motores_tipo": "Turbofan GTF",
+    "curiosidad": "Llegó a AR en 2025, reemplaza al E190. Más moderno de la flota regional.",
+    "imagen_autor": "Embraer / Wikimedia",
+    "imagen_licencia": "CC BY-SA 4.0"
   }
 ]
