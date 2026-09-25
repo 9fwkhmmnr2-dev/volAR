@@ -4,79 +4,83 @@ body{margin:0;font:14px Inter,system-ui;background:#f7f8fb;color:#101828}
 .nav{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid #e4e7ec;padding:12px 16px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 .card{background:#fff;border:1px solid #e4e7ec;border-radius:18px;padding:14px;cursor:pointer;transition:.2s}
 .card:hover{transform:translateY(-3px);border-color:#0f62fe}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;padding:16px}
 .grid2{display:grid;grid-template-columns:320px 1fr;gap:16px;padding:16px;max-width:1200px;margin:auto}
 @media(max-width:800px){.grid2{grid-template-columns:1fr}}
-.btn{border:1px solid #e4e7ec;background:#fff;border-radius:999px;padding:7px 12px}
+.btn{border:1px solid #e4e7ec;background:#fff;border-radius:999px;padding:7px 12px;text-decoration:none;color:#101828;display:inline-block}
 .badge{font-size:10px;padding:3px 8px;border-radius:999px;background:#eef2ff;border:1px solid #e4e7ec}
 .route{border-left:3px solid #0f62fe;padding:8px 12px;margin-bottom:8px;background:#fbfdff;border-radius:0 12px 12px 0}
 </style>
 </head><body>
 <div class="nav">
   <a href="/">← Home</a><b>Aerolíneas y Rutas</b>
-  <input id="q" placeholder="Buscar AR, Jetsmart, Flybondi..." class="btn" style="margin-left:auto" oninput="filtrar()">
-  <select id="fPais" class="btn" onchange="filtrar()"><option value="">Todos países</option><option>Argentina</option><option>Chile</option><option>Brasil</option><option>Low-cost</option></select>
+  <input id="q" placeholder="Buscar AR, Jetsmart..." class="btn" style="margin-left:auto" oninput="filtrar()">
 </div>
 
 <div class="grid2">
-  <div>
-    <div style="font-size:12px;color:#667085;padding:0 4px 8px">8 aerolíneas con mayor presencia en Argentina</div>
-    <div id="airlinesGrid"></div>
-  </div>
-  <div>
-    <div id="detail" style="position:sticky;top:70px"></div>
-  </div>
+  <div><div id="airlinesGrid"></div></div>
+  <div><div id="detail" style="position:sticky;top:70px"></div></div>
 </div>
 
 <script>
-let AIRLINES=[], ROUTES=[], AIRCRAFT=[];
+let AIRLINES=[], ROUTES=[], AIRCRAFT=[], AIRPORTS=[];
 Promise.all([
   fetch('/data/airlines.json').then(r=>r.json()).catch(()=>[]),
   fetch('/data/routes.json').then(r=>r.json()).catch(()=>[]),
-  fetch('/data/aircraft.json').then(r=>r.json()).catch(()=>[])
-]).then(([al,ro,ac])=>{AIRLINES=al;ROUTES=ro;AIRCRAFT=ac;const q=new URLSearchParams(location.search).get('q');if(q) document.getElementById('q').value=q;filtrar()});
+  fetch('/data/aircraft.json').then(r=>r.json()).catch(()=>[]),
+  fetch('/data/airports.json').then(r=>r.json()).catch(()=>[])
+]).then(([al,ro,ac,ap])=>{AIRLINES=al;ROUTES=ro;AIRCRAFT=ac;AIRPORTS=ap;filtrar()});
 
 function filtrar(){
   let list=[...AIRLINES];
   const q=document.getElementById('q').value.toLowerCase();
-  const pais=document.getElementById('fPais').value;
-  if(q) list=list.filter(a=>(a.nombre+a.iata+a.icao+a.id).toLowerCase().includes(q));
-  if(pais) list=list.filter(a=>a.pais===pais || a.tipo===pais);
-  renderAirlines(list);
-}
-function renderAirlines(list){
+  if(q) list=list.filter(a=>(a.nombre+a.iata+a.id).toLowerCase().includes(q));
   document.getElementById('airlinesGrid').innerHTML=list.map(a=>`
     <div class="card" onclick="showAirline('${a.id}')" style="display:flex;gap:12px;align-items:center;margin-bottom:10px">
       <img src="${a.logo}" style="width:48px;height:48px;object-fit:contain;border-radius:10px;background:#f7f8fb" onerror="this.style.display='none'">
-      <div style="flex:1"><div style="font-weight:800">${a.nombre}</div><div style="font-size:11px;color:#667085">${a.pais} • ${a.iata}/${a.icao}</div></div>
-      <div class="badge">${a.modelos?.length||0} aviones</div>
+      <div style="flex:1"><div style="font-weight:800">${a.nombre}</div><div style="font-size:11px;color:#667085">${a.iata}/${a.icao}</div></div>
     </div>
-  `).join('')||'<div style="padding:20px;color:#667085">Sin resultados</div>';
+  `).join('');
   if(list[0]) showAirline(list[0].id);
 }
+
+function uniq(arr){return [...new Set(arr.filter(Boolean))]}
+function getAirportName(code){
+  const ap=AIRPORTS.find(x=>x.iata===code||x.id===code);
+  if(!ap) return code;
+  return `${ap.nombre_completo||ap.nombre} (${ap.iata})`;
+}
+
 function showAirline(id){
   const a=AIRLINES.find(x=>x.id===id); if(!a) return;
-  location.hash=id;
-  const myRoutes=ROUTES.filter(r=>r.aerolineaId===a.id || r.airlineId===a.id);
-  const models=(a.modelos||[]).map(mid=>AIRCRAFT.find(ac=>ac.id===mid)).filter(Boolean);
+  // CORRECCIÓN: deduplica hubs y evita "Newbery" repetido
+  const rawHubs=[...(a.hubs||[]),...(a.aeropuertos_principales||[])];
+  const hubs=uniq(rawHubs).map(c=>c.trim()).filter(c=>c);
+  // Si tenés AEP y "Aeroparque Jorge Newbery", lo unificamos a AEP
+  const hubsClean=uniq(hubs.map(h=>{
+    const up=h.toUpperCase();
+    if(up.includes('NEWBERY')||up.includes('AEROPARQUE')) return 'AEP';
+    if(up.includes('EZEIZA')||up.includes('PISTARINI')) return 'EZE';
+    return h;
+  }));
+
+  const myRoutes=ROUTES.filter(r=> (r.aerolineaId===a.id || r.airlineId===a.id));
+  const models=(a.modelos||a.flota||[]).map(mid=>AIRCRAFT.find(ac=>ac.id===mid)).filter(Boolean);
+
   document.getElementById('detail').innerHTML=`
     <div class="card" style="cursor:default">
       <div style="display:flex;gap:14px;align-items:center">
         <img src="${a.logo}" style="width:72px;height:72px;object-fit:contain;border-radius:14px;background:#f7f8fb" onerror="this.style.display='none'">
-        <div><h2 style="margin:0">${a.nombre}</h2><div style="color:#667085">${a.pais} • ${a.iata}/${a.icao} • ${a.descripcion||''}</div><div style="margin-top:6px;font-size:11px;color:#667085">Logo: ${a.logoSource||'Wikimedia Commons'} • ${a.logoAuthor||''} • ${a.logoLicense||''}</div></div>
+        <div><h2 style="margin:0">${a.nombre}</h2><div style="color:#667085">${a.pais||'Argentina'} • ${a.iata}/${a.icao}</div></div>
       </div>
       
-      <div style="margin-top:16px"><b>Flota / Modelos utilizados:</b><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">${models.length? models.map(m=>`<a href="/aviones/#${m.id}" class="btn" style="text-decoration:none">${m.nombre_completo}</a>`).join('') : '<span style="font-size:12px;color:#667085">Info de flota no disponible todavía</span>'}</div></div>
+      <div style="margin-top:16px"><b>Flota:</b><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">${models.length? models.map(m=>`<a href="/aviones/#${m.id}" class="btn">${m.nombre_completo}</a>`).join('') : '<span style="font-size:12px;color:#667085">Sin flota cargada</span>'}</div></div>
 
-      <div style="margin-top:18px"><b>Hubs:</b> ${a.hubs?.join(', ')||a.aeropuertos_principales?.join(', ')||'AEP, EZE'}</div>
+      <div style="margin-top:18px"><b>Hubs principales:</b><div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:6px">${hubsClean.map(h=>`<span class="btn" style="font-size:12px">${getAirportName(h)}</span>`).join('')}</div></div>
 
       <div style="margin-top:20px">
-        <b>🗺️ Rutas de ${a.nombre} (${myRoutes.length})</b>
-        <div style="margin-top:10px;max-height:420px;overflow:auto;padding-right:6px">
-          ${myRoutes.length? myRoutes.map(r=>{
-            const acs=(r.aircraftIds||[]).map(mid=>AIRCRAFT.find(ac=>ac.id===mid)?.modelo||mid).join(', ');
-            return `<div class="route"><div style="font-weight:700">${r.origen} → ${r.destino} <span style="font-weight:400;color:#667085">(${r.origen_iata||r.origen} → ${r.destino_iata||r.destino})</span></div><div style="font-size:12px;color:#667085">Tipo: ${r.tipo||'nacional'} • Frecuencia: ${r.frecuencia||'Info no disponible'}</div><div style="font-size:12px">Aeronaves posibles: ${acs||'Varios modelos posibles'}</div></div>`
-          }).join('') : '<div style="font-size:12px;color:#667085;padding:10px">No hay rutas cargadas todavía en routes.json para esta aerolínea. Estructura lista para agregar: { airlineId: "aerolineas-argentinas", origen:"AEP", destino:"COR", tipo:"nacional", aircraftIds:["airbus-a320-200"] }</div>'}
+        <b>🗺️ Rutas (${myRoutes.length})</b>
+        <div style="margin-top:10px;max-height:420px;overflow:auto">
+          ${myRoutes.length? myRoutes.map(r=>`<div class="route"><b>${r.origen} → ${r.destino}</b><div style="font-size:12px;color:#667085">${r.tipo||'nacional'} • Aeronaves: ${(r.aircraftIds||[]).join(', ')||'varios modelos posibles'}</div></div>`).join('') : '<div style="font-size:12px;color:#667085;padding:10px">Aún no hay rutas en routes.json para esta aerolínea.</div>'}
         </div>
       </div>
     </div>
