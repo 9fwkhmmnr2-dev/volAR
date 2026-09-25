@@ -4,20 +4,20 @@
     "iata": "IGR",
     "name": "Puerto Iguazú",
     "city": "Puerto Iguazú, Misiones",
-    "image": "public/images/airports/igr.jpg"
+    "image": "/images/airports/igr.jpg"
   },
   {
     "id": "eze",
     "iata": "EZE",
     "name": "Ministro Pistarini",
     "city": "Ezeiza",
-    "image": "public/images/airports/eze.jpg"
+    "image": "/images/airports/eze.jpg"
   },
   {
     "id": "aep",
     "iata": "AEP",
     "name": "Jorge Newbery",
     "city": "CABA",
-    "image": "public/images/airports/aep.jpg"
+    "image": "/images/airports/aep.jpg"
   }
 ]
