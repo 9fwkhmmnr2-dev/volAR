@@ -1,120 +1,269 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>VolAR — Conocé lo que vuela sobre Argentina</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VolAR — Enciclopedia de aviación argentina</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
 <style>
-:root{--bg:#fbfdff;--card:#fff;--text:#0e1a2a;--muted:#5d718d;--blue:#0f62fe;--blueD:#0b3d91;--b:#e6eefb}
-[data-theme=dark]{--bg:#050a14;--card:#0d1424;--text:#eef3ff;--muted:#8aa0c2;--b:#1a2a4a}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 Inter,system-ui}
-.nav{position:sticky;top:0;z-index:10;background:var(--card);border-bottom:1px solid var(--b);display:flex;gap:12px;padding:10px 16px;align-items:center}
-.logo{font-weight:900;display:flex;gap:8px;align-items:center}.badge{width:32px;height:32px;border-radius:10px;background:linear-gradient(135deg,var(--blueD),var(--blue));display:grid;place-items:center;color:white}
-.search{flex:1;display:flex;align-items:center;background:var(--bg);border:1px solid var(--b);border-radius:999px;padding:8px 14px}
-.search input{border:0;outline:0;background:transparent;width:100%;color:var(--text)}
-.hero{padding:40px 20px 20px;text-align:center;max-width:900px;margin:auto}
-.hero h1{font-size:clamp(34px,6vw,58px);line-height:.9;margin:0}
-.quick{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:14px}
-.chip{border:1px solid var(--b);background:var(--card);padding:8px 14px;border-radius:999px;cursor:pointer}
-.grid{max-width:1220px;margin:auto;padding:16px;display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
-.card{background:var(--card);border:1px solid var(--b);border-radius:16px;padding:12px}
-.tabs{display:flex;gap:8px;overflow:auto;padding:10px 16px;max-width:1220px;margin:auto}
-.btn{border:1px solid var(--b);background:var(--card);padding:7px 12px;border-radius:12px;cursor:pointer}
-.btn.primary{background:var(--blue);color:white;border-color:var(--blue)}
-.section{max-width:1220px;margin:16px auto;padding:0 16px}
-.timeline{display:flex;gap:8px;overflow:auto;padding:8px 0}
-.phase{min-width:120px;padding:10px;border-radius:12px;border:1px solid var(--b);background:var(--card);cursor:pointer}
-.phase.active{background:var(--blue);color:white}
-@media(max-width:700px){.grid{grid-template-columns:1fr}}
+:root{
+  --bg:#f7f8fb;
+  --card:#ffffff;
+  --text:#101828;
+  --muted:#667085;
+  --line:#e4e7ec;
+  --blue:#0f62fe;
+  --blue2:#0b3d91;
+  --radius:24px;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:radial-gradient(1200px 600px at 10% -10%, #e0eaff 0%, transparent 60%), var(--bg);
+  color:var(--text);
+  font:15px/1.5 Inter, ui-sans-serif, system-ui;
+  -webkit-font-smoothing:antialiased;
+}
+.nav{
+  position:sticky;top:0;z-index:20;
+  backdrop-filter:blur(14px);
+  background:color-mix(in srgb, var(--card) 82%, transparent);
+  border-bottom:1px solid var(--line);
+  padding:14px 20px;
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+}
+.logo{
+  display:flex;align-items:center;gap:10px;
+  font-weight:900;letter-spacing:-0.5px;font-size:20px;
+}
+.badge{
+  width:36px;height:36px;border-radius:11px;
+  background:linear-gradient(135deg,var(--blue2),var(--blue));
+  display:grid;place-items:center;color:white;font-size:18px;
+  box-shadow:0 8px 20px rgba(15,98,254,.25);
+}
+.searchWrap{
+  flex:1;max-width:360px;display:flex;align-items:center;gap:8px;
+  background:var(--card);border:1px solid var(--line);
+  border-radius:999px;padding:8px 14px;
+}
+.searchWrap input{
+  border:0;outline:0;background:transparent;width:100%;
+  font-size:14px;color:var(--text);
+}
+.hero{
+  max-width:900px;margin:0 auto;
+  padding:56px 20px 18px;text-align:center;
+}
+.hero h1{
+  margin:0;
+  font-size:clamp(36px,6vw,62px);
+  line-height:.92;letter-spacing:-1.5px;font-weight:900;
+}
+.hero p{
+  margin:14px auto 0;max-width:560px;
+  font-size:18px;color:var(--muted);line-height:1.5;
+}
+.kpis{
+  margin:18px auto 0;display:flex;gap:8px;justify-content:center;flex-wrap:wrap;
+}
+.kpi{
+  font-size:12px;color:var(--muted);
+  border:1px solid var(--line);background:var(--card);
+  padding:6px 12px;border-radius:999px;
+}
+.menu{
+  max-width:1120px;margin:22px auto 40px;
+  padding:0 16px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+@media(max-width:900px){.menu{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.menu{grid-template-columns:1fr}}
+
+.card{
+  position:relative;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  overflow:hidden;
+  text-decoration:none;color:inherit;
+  display:flex;flex-direction:column;
+  transition:transform .28s cubic-bezier(.2,.8,.2,1), box-shadow .28s, border-color .28s;
+  will-change:transform;
+}
+.card:hover{
+  transform:translateY(-6px);
+  border-color:var(--blue);
+  box-shadow:0 22px 50px rgba(16,24,40,.12);
+}
+.card:active{transform:translateY(-2px) scale(.99)}
+.thumb{
+  position:relative;height:168px;overflow:hidden;background:#eef2ff;
+}
+.thumb img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform .6s cubic-bezier(.2,.8,.2,1);
+  display:block;
+}
+.card:hover .thumb img{transform:scale(1.06)}
+.thumb::after{
+  content:"";
+  position:absolute;inset:0;
+  background:linear-gradient(180deg, transparent 20%, rgba(10,18,40,.55) 100%);
+}
+.badgeTop{
+  position:absolute;top:12px;left:12px;z-index:2;
+  background:rgba(255,255,255,.9);backdrop-filter:blur(6px);
+  border:1px solid var(--line);
+  border-radius:999px;padding:6px 10px;
+  font-size:11px;font-weight:700;letter-spacing:.3px;
+}
+.content{
+  padding:16px 16px 14px;
+  display:flex;flex-direction:column;gap:6px;flex:1;
+}
+.content h3{
+  margin:0;font-size:18px;letter-spacing:-.3px;
+  display:flex;align-items:center;gap:8px;
+}
+.content p{
+  margin:0;color:var(--muted);font-size:13px;line-height:1.45;
+}
+.go{
+  margin-top:auto;
+  display:flex;align-items:center;gap:6px;
+  font-size:13px;font-weight:700;color:var(--blue);
+}
+.go i{
+  width:22px;height:22px;border-radius:999px;
+  background:var(--bg);border:1px solid var(--line);
+  display:grid;place-items:center;transition:.2s;
+}
+.card:hover .go i{background:var(--blue);color:white;border-color:var(--blue);transform:translateX(2px)}
+.footer{
+  max-width:1120px;margin:0 auto 30px;padding:0 16px;
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
+  color:var(--muted);font-size:12px;
+}
 </style>
 </head>
 <body>
+
 <div class="nav">
   <div class="logo"><div class="badge">✈</div> VolAR</div>
-  <div class="search">🔍<input id="globalSearch" placeholder="Buscá un avión, aerolínea, vuelo o aeropuerto…" oninput="doSearch(this.value)"></div>
-  <div style="display:flex;gap:6px"><a href="#aviones" class="chip">Aviones</a><a href="#sonidos" class="chip">Sonidos</a><a href="#vuelo" class="chip">Mi vuelo</a><button class="btn" onclick="toggleTheme()">🌙</button></div>
-</div>
-<div class="hero">
-  <h1>VolAR<br>Conocé lo que vuela sobre Argentina.</h1>
-  <div class="quick">
-    <button class="chip" onclick="scrollToId('aviones')">✈️ Aviones</button>
-    <button class="chip" onclick="scrollToId('rutas')">🗺️ Explorar rutas</button>
+  <div class="searchWrap">
+    <span>🔍</span>
+    <input id="globalSearch" placeholder="Buscá A320, EZE, AR1300, sonido tren..."
+      onkeydown="if(event.key==='Enter'){ const q=this.value.trim(); if(!q) return;
+      if(q.toUpperCase().startsWith('AR')) location.href='/vuelos/?q='+encodeURIComponent(q);
+      else if(['EZE','AEP','COR','MDZ','BRC','IGR'].includes(q.toUpperCase())) location.href='/aeropuertos/?q='+encodeURIComponent(q);
+      else location.href='/aviones/?q='+encodeURIComponent(q);
+    }">
   </div>
 </div>
-<div class="tabs" id="filters"></div>
-<div class="section"><div id="aircraftGrid" class="grid"></div></div>
-<div class="section" id="sonidos"><h2>¿Qué es ese sonido?</h2><div id="soundList" class="grid"></div></div>
-<div class="section" id="sintiendo"><h2>¿Qué estoy sintiendo?</h2><div id="phaseLine" class="timeline"></div><div id="phaseDetail" class="card"></div></div>
-<div class="section" id="vuelo"><h2>🛫 Mi vuelo</h2><div class="search" style="max-width:380px"><input id="flightNum" placeholder="Ej: AR1300"><button class="btn primary" onclick="findFlight()" style="margin-left:6px">Buscar</button></div><div id="flightRes" style="margin-top:10px"></div></div>
 
-<div class="section" id="rutas"><h2>🗺️ Explorar rutas — Argentina</h2>
-<div class="card"><div id="routeMap" style="display:flex;flex-wrap:wrap;gap:8px"></div><div id="airportDetail" style="margin-top:14px"></div></div></div>
+<div class="hero">
+  <h1>Conocé lo que<br>vuela sobre vos.</h1>
+  <p>VolAR es una enciclopedia interactiva y tranquila de aviación argentina. Sin ruido, sin listas infinitas. Elegí qué querés explorar.</p>
+  <div class="kpis">
+    <div class="kpi">✈ 6 categorías</div>
+    <div class="kpi">🗃️ Datos en JSON separados</div>
+    <div class="kpi">🔗 IDs relacionados</div>
+  </div>
+</div>
 
-<script>
-let DATA={
- aircraft:[
-  {id:"a320", manufacturer:"Airbus", model:"A320", variant:"A320-200", length:37.57, wingspan:35.8, pax:186, range:6100, engines:"CFM56-5B", facts:"El más usado en Argentina."},
-  {id:"a320n", manufacturer:"Airbus", model:"A320neo", variant:"A320-271N", length:37.57, wingspan:35.8, pax:186, range:6400, engines:"LEAP-1A", facts:"15% menos consumo."},
-  {id:"b738", manufacturer:"Boeing", model:"737-800", variant:"737-8AS", length:39.5, wingspan:35.8, pax:189, range:5400, engines:"CFM56-7B", facts:"Sky Interior."},
-  {id:"b38m", manufacturer:"Boeing", model:"737 MAX 8", variant:"MAX 8", length:39.47, wingspan:35.9, pax:200, range:6500, engines:"LEAP-1B", facts:"Más eficiente."},
-  {id:"e190", manufacturer:"Embraer", model:"E190", variant:"E190AR", length:36.24, wingspan:28.72, pax:114, range:4500, engines:"CF34-10E", facts:"Regional."}
- ],
- airports:[],
- routes:[
-  {id:"AR1300", origin:"AEP", dest:"COR", aircraft:"a320", duration:"1h20"},
-  {id:"AR1736", origin:"AEP", dest:"IGR", aircraft:"a320", duration:"1h55"}
- ],
- sounds:[
-  {id:"apu", name:"APU", phase:"Antes del despegue", when:"Antes de embarcar", what:"Turbina auxiliar"},
-  {id:"flaps", name:"FLAPS", phase:"Despegue", when:"En pista", what:"Configuración alar"},
-  {id:"gear", name:"TREN", phase:"Aterrizaje", when:"En aproximación", what:"Extensión"}
- ],
- phases:[
-  {id:"puerta", label:"PUERTA", feel:"Vibración suave", doing:"Chequeos"},
-  {id:"rodaje", label:"RODAJE", feel:"Movimiento lento", doing:"Va a pista"},
-  {id:"despegue", label:"DESPEGUE", feel:"Aceleración", doing:"Potencia máxima"},
-  {id:"crucero", label:"CRUCERO", feel:"Estable", doing:"Autopiloto"},
-  {id:"aterrizaje", label:"ATERRIZAJE", feel:"Descenso", doing:"Aterriza"}
- ]
-};
-function toggleTheme(){const c=document.documentElement.getAttribute('data-theme');document.documentElement.setAttribute('data-theme',c==='dark'?'light':'dark')}
-function scrollToId(id){document.getElementById(id)?.scrollIntoView({behavior:'smooth'})}
-let activeMan='Todos';
-function renderFilters(){const m=['Todos',...new Set(DATA.aircraft.map(a=>a.manufacturer))];document.getElementById('filters').innerHTML=m.map(x=>`<button class="btn ${activeMan===x?'primary':''}" onclick="setMan('${x}')">${x}</button>`).join('')}
-function setMan(m){activeMan=m;renderFilters();renderAircraft()}
-function renderAircraft(list=DATA.aircraft){const g=document.getElementById('aircraftGrid');const f=list.filter(a=>activeMan==='Todos'||a.manufacturer===activeMan);g.innerHTML=f.map(a=>`<div class="card"><b>${a.manufacturer} ${a.model}</b><div style="margin-top:6px;font-size:13px">${a.pax} pax • ${a.range}km • ${a.engines}</div><div style="font-size:12px;color:#5d718d;margin-top:4px">${a.facts}</div></div>`).join('')}
-function renderSounds(list=DATA.sounds){document.getElementById('soundList').innerHTML=list.map(s=>`<div class="card"><b>${s.name}</b> — ${s.phase}<br><span style="font-size:12px">${s.when}: ${s.what}</span></div>`).join('')}
-function renderPhases(){document.getElementById('phaseLine').innerHTML=DATA.phases.map(p=>`<div class="phase" id="ph-${p.id}" onclick="showPhase('${p.id}')">${p.label}</div>`).join('');showPhase('puerta')}
-function showPhase(id){document.querySelectorAll('.phase').forEach(e=>e.classList.remove('active'));document.getElementById('ph-'+id)?.classList.add('active');const p=DATA.phases.find(x=>x.id===id);document.getElementById('phaseDetail').innerHTML=`<b>Qué hace el avión:</b> ${p.doing}<br><div style="margin-top:6px"><b>Sensación:</b> ${p.feel}</div>`}
-function findFlight(){const n=document.getElementById('flightNum').value.toUpperCase().trim();const r=DATA.routes.find(x=>x.id===n);const b=document.getElementById('flightRes');if(!r){b.innerHTML=`<div class="card">Vuelo no encontrado</div>`;return}b.innerHTML=`<div class="card"><b>${r.id}</b> ${r.origin} → ${r.dest} • ${r.duration}</div>`}
-function renderRoutes(){
- document.getElementById('routeMap').innerHTML=DATA.airports.map(ap=>`<button class="btn" onclick="showAirport('${ap.id}')">${ap.iata} — ${ap.ciudad}</button>`).join('');
- if(DATA.airports.length) showAirport(DATA.airports[0].id);
-}
-function showAirport(id){
- const ap=DATA.airports.find(a=>a.id===id); if(!ap) return;
- const img=ap.images?.principal?.url||ap.image;
- const wiki=ap.images?.principal?.wiki_url||'';
- document.getElementById('airportDetail').innerHTML=`
- <div class="card" style="max-width:600px">
-   <img src="${img}" alt="${ap.nombre_completo||ap.city}" style="width:100%;height:200px;object-fit:cover;border-radius:12px;margin-bottom:10px" onerror="this.src='${wiki}';this.onerror=null">
-   <div style="font-size:18px;font-weight:800">${ap.nombre_completo||ap.city} (${ap.iata}/${ap.icao})</div>
-   <div style="margin-top:6px;line-height:1.6;color:#5d718d">
-     ${ap.ciudad} - ${ap.provincia||ap.prov}<br>
-     Pasajeros 2025: ${ap.pasajeros_2025?.toLocaleString('es-AR')||ap.pax?.toLocaleString('es-AR')||'—'}<br>
-     Promedio diario: ${ap.promedio_diario_2025?.toLocaleString('es-AR')||'—'}
-   </div>
- </div>`;
-}
-function doSearch(q){q=q.toLowerCase();if(!q){renderAircraft(DATA.aircraft);renderRoutes();renderSounds();return}renderAircraft(DATA.aircraft.filter(a=>(a.model+a.manufacturer).toLowerCase().includes(q)));const f=DATA.airports.filter(a=>(a.ciudad+a.nombre_completo+a.iata).toLowerCase().includes(q));if(f.length){document.getElementById('routeMap').innerHTML=f.map(ap=>`<button class="btn" onclick="showAirport('${ap.id}')">${ap.iata} — ${ap.ciudad}</button>`).join('');scrollToId('rutas');}}
+<div class="menu">
+  <!-- 1 AVIONES -->
+  <a class="card" href="/aviones/">
+    <div class="thumb">
+      <div class="badgeTop">CATÁLOGO</div>
+      <img src="/images/aircraft/a320.jpg" alt="Aviones comerciales"
+        onerror="this.src='https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=800&auto=format&fit=crop'">
+    </div>
+    <div class="content">
+      <h3>AVIONES</h3>
+      <p>Modelos que operan en Argentina. Ficha técnica, fotos con licencia y curiosidades.</p>
+      <div class="go">Explorar <i>→</i></div>
+    </div>
+  </a>
 
-fetch('/data/airports.json').then(r=>r.json()).then(j=>{DATA.airports=j;renderRoutes()}).catch(()=>{
- DATA.airports=[
-  {id:"EZE",iata:"EZE",icao:"SAEZ",ciudad:"Ezeiza",provincia:"Buenos Aires",nombre_completo:"Ministro Pistarini",pasajeros_2025:11911000,promedio_diario_2025:32633,images:{principal:{url:"/images/airports/eze.jpg",wiki_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Aeropuerto_Internacional_de_Ezeiza.jpg/800px-Aeropuerto_Internacional_de_Ezeiza.jpg"}}},
-  {id:"AEP",iata:"AEP",icao:"SABE",ciudad:"Buenos Aires",provincia:"CABA",nombre_completo:"Aeroparque Jorge Newbery",pasajeros_2025:17738000,promedio_diario_2025:48597,images:{principal:{url:"/images/airports/aep.jpg",wiki_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Aeroparque_Jorge_Newbery.jpg/800px-Aeroparque_Jorge_Newbery.jpg"}}},
-  {id:"COR",iata:"COR",icao:"SACO",ciudad:"Córdoba",provincia:"Córdoba",nombre_completo:"Ambrosio Taravella",pasajeros_2025:3265000,promedio_diario_2025:8945,images:{principal:{url:"/images/airports/cor.jpg",wiki_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Aeropuerto_Cordoba_Taravella.jpg/800px-Aeropuerto_Cordoba_Taravella.jpg"}}}
- ];renderRoutes();
-});
-renderFilters();renderAircraft();renderSounds();renderPhases();
-</script>
+  <!-- 2 VUELOS -->
+  <a class="card" href="/vuelos/">
+    <div class="thumb">
+      <div class="badgeTop">BUSCADOR</div>
+      <img src="/images/aircraft/b738.jpg" alt="Avión despegando"
+        onerror="this.src='https://images.unsplash.com/photo-1556388158-158ea5ccacbd?q=80&w=800&auto=format&fit=crop'">
+    </div>
+    <div class="content">
+      <h3>VUELOS</h3>
+      <p>Buscá por número, aerolínea u origen. Qué avión vas a tomar y a qué ficha corresponde.</p>
+      <div class="go">Buscar vuelo <i>→</i></div>
+    </div>
+  </a>
+
+  <!-- 3 SONIDOS -->
+  <a class="card" href="/sonidos/">
+    <div class="thumb">
+      <div class="badgeTop">EXPERIENCIA</div>
+      <img src="/images/sounds/cabina.jpg" alt="Cabina de avión sonidos"
+        onerror="this.src='https://images.unsplash.com/photo-1540339832862-474599807836?q=80&w=800&auto=format&fit=crop'">
+    </div>
+    <div class="content">
+      <h3>SONIDOS</h3>
+      <p>La sección más completa. Filtros por avión, etapa, origen y si es normal o consultar.</p>
+      <div class="go">Escuchar <i>→</i></div>
+    </div>
+  </a>
+
+  <!-- 4 AEROPUERTOS -->
+  <a class="card" href="/aeropuertos/">
+    <div class="thumb">
+      <div class="badgeTop">8 PRINCIPALES</div>
+      <img src="/images/airports/aep.jpg" alt="Pista de aterrizaje"
+        onerror="this.src='https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=800&auto=format&fit=crop'">
+    </div>
+    <div class="content">
+      <h3>AEROPUERTOS</h3>
+      <p>Los más concurridos 2025. Pasajeros anuales y promedio diario matemático, no real diario.</p>
+      <div class="go">Ver aeropuertos <i>→</i></div>
+    </div>
+  </a>
+
+  <!-- 5 RUTAS -->
+  <a class="card" href="/rutas/">
+    <div class="thumb">
+      <div class="badgeTop">MAPA</div>
+      <img src="/images/rutas/mapa.jpg" alt="Mapa de rutas aéreas"
+        onerror="this.src='https://images.unsplash.com/photo-1526772661823-3f88f33771cd?q=80&w=800&auto=format&fit=crop'">
+    </div>
+    <div class="content">
+      <h3>RUTAS DE AEROLÍNEA</h3>
+      <p>Conexiones nacionales e internacionales. Origen → destino y aeronaves posibles.</p>
+      <div class="go">Ver mapa <i>→</i></div>
+    </div>
+  </a>
+
+  <!-- 6 AEROLINEAS -->
+  <a class="card" href="/aerolineas/">
+    <div class="thumb">
+      <div class="badgeTop">OPERADORES</div>
+      <img src="/images/airlines/ar.jpg" alt="Aerolínea"
+        onerror="this.src='https://images.unsplash.com/photo-1488085061387-422e29b40080?q=80&w=800&auto=format&fit=crop'">
+    </div>
+    <div class="content">
+      <h3>AEROLÍNEAS</h3>
+      <p>Las 8 con mayor presencia. Logos con licencia, flota y aeropuertos principales.</p>
+      <div class="go">Conocer <i>→</i></div>
+    </div>
+  </a>
+</div>
+
+<div class="footer">
+  <span>VolAR — Datos en /public/data/*.json • Imágenes con fuente, autor y licencia</span>
+  <span>HOME → elegir sección → explorar → ficha → relacionar</span>
+</div>
+
 </body>
 </html>
