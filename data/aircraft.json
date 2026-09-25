@@ -5,7 +5,7 @@
     "fabricante": "Boeing",
     "variante": "737-800",
     "familia": "B737 NG",
-    "imagen": "/images/aircraft/b737-800.jpg?v=999",
+    "imagen": "/images/aircraft/b737-800.jpg?v=1001",
     "operado_por": ["Aerolíneas Argentinas", "Flybondi"],
     "pax": "170-189",
     "longitud_m": 39.5,
@@ -14,7 +14,7 @@
     "alcance_km": 5665,
     "motores": "2x CFM56-7B26",
     "motores_tipo": "Turbofan",
-    "curiosidad": "El celeste de Aerolíneas que mandaste vos."
+    "curiosidad": "Es el 737 más vendido de la historia. Se fabricaron más de 5.000 y fue el primero en usar winglets blended que ahorran 3% de combustible."
   },
   {
     "id": "b737-max8",
@@ -22,7 +22,7 @@
     "fabricante": "Boeing",
     "variante": "737-8 MAX",
     "familia": "B737 MAX",
-    "imagen": "/images/aircraft/b737-max8.jpg?v=999",
+    "imagen": "/images/aircraft/b737-max8.jpg?v=1001",
     "operado_por": ["Aerolíneas Argentinas", "JetSMART"],
     "pax": "170-189",
     "longitud_m": 39.52,
@@ -30,8 +30,8 @@
     "mtow_kg": 82191,
     "alcance_km": 6580,
     "motores": "2x LEAP-1B",
-    "motores_tipo": "Turbofan LEAP",
-    "curiosidad": "Winglets dobles, motores con serrucho."
+    "motores_tipo": "Turbofan",
+    "curiosidad": "Estuvo 20 meses en tierra en todo el mundo entre 2019 y 2020 por el sistema MCAS. Sus motores LEAP son tan grandes que tuvieron que adelantarlos y subirlos."
   },
   {
     "id": "a320-200",
@@ -39,7 +39,7 @@
     "fabricante": "Airbus",
     "variante": "A320-200",
     "familia": "A320ceo",
-    "imagen": "/images/aircraft/a320-200.jpg?v=999",
+    "imagen": "/images/aircraft/a320-200.jpg?v=1001",
     "operado_por": ["JetSMART", "LATAM"],
     "pax": "174-186",
     "longitud_m": 37.57,
@@ -48,7 +48,7 @@
     "alcance_km": 5700,
     "motores": "2x CFM56-5B",
     "motores_tipo": "Turbofan",
-    "curiosidad": "El Airbus con cartel A320 en el fuselaje."
+    "curiosidad": "Fue el primer avión comercial con fly-by-wire, o sea sin cables, todo por computadora. Voló por primera vez en 1987."
   },
   {
     "id": "a320-neo",
@@ -56,7 +56,7 @@
     "fabricante": "Airbus",
     "variante": "A320-271N",
     "familia": "A320neo",
-    "imagen": "/images/aircraft/a320-neo.jpg?v=999",
+    "imagen": "/images/aircraft/a320-neo.jpg?v=1001",
     "operado_por": ["JetSMART Argentina"],
     "pax": "186",
     "longitud_m": 37.57,
@@ -64,8 +64,8 @@
     "mtow_kg": 79000,
     "alcance_km": 6400,
     "motores": "2x LEAP-1A26",
-    "motores_tipo": "Turbofan neo",
-    "curiosidad": "El del yaguareté de JetSMART que mandaste."
+    "motores_tipo": "Turbofan",
+    "curiosidad": "NEO significa New Engine Option. Gasta 15% menos que el ceo y es 50% más silencioso. JetSMART Argentina tiene la flota más nueva del país con estos."
   },
   {
     "id": "a321-neo",
@@ -73,7 +73,7 @@
     "fabricante": "Airbus",
     "variante": "A321-271NX",
     "familia": "A321neo",
-    "imagen": "/images/aircraft/a321-neo.jpg?v=999",
+    "imagen": "/images/aircraft/a321-neo.jpg?v=1001",
     "operado_por": ["JetSMART"],
     "pax": "240",
     "longitud_m": 44.51,
@@ -82,7 +82,7 @@
     "alcance_km": 7400,
     "motores": "2x LEAP-1A32",
     "motores_tipo": "Turbofan",
-    "curiosidad": "El larguísimo del hangar."
+    "curiosidad": "Es el avión de un solo pasillo más largo del mundo. Con 240 asientos, lleva casi lo mismo que un 757 y puede cruzar el Atlántico."
   },
   {
     "id": "a330-200",
@@ -90,7 +90,7 @@
     "fabricante": "Airbus",
     "variante": "A330-200",
     "familia": "A330",
-    "imagen": "/images/aircraft/a330-200.jpg?v=999",
+    "imagen": "/images/aircraft/a330-200.jpg?v=1001",
     "operado_por": ["Aerolíneas Argentinas"],
     "pax": "265",
     "longitud_m": 58.82,
@@ -98,7 +98,7 @@
     "mtow_kg": 242000,
     "alcance_km": 13450,
     "motores": "2x GE CF6-80E1",
-    "motores_tipo": "Widebody",
-    "curiosidad": "El grande arriba de las nubes."
+    "motores_tipo": "Turbofan",
+    "curiosidad": "Aunque es más corto que el A330-300, vuela más lejos: 13.450 km sin parar. Por eso Aerolíneas lo usa para Madrid, Miami y Nueva York directo desde Ezeiza."
   }
 ]
